@@ -62,7 +62,7 @@
         </div>
     </div>
     
-    <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
     <script>
         const penerimaanList = {!! json_encode($penerimaan) !!};
         const store = {!! json_encode($store) !!};
