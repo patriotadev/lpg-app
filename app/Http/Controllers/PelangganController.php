@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Imports\PelangganImport;
 use App\Models\Pelanggan;
+use App\Models\Penjualan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,11 +18,70 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        //
+        $params = date('Y-m');
+        $dateStart = $params . "-01 00:00:00";
+        $dateEnd = $params . "-31 23:59:59";
+        $dataPelanggan = Pelanggan::all();
+        $detailPelanggan = [];
+        foreach ($dataPelanggan as $pelanggan) {
+            # code...
+            $jumlahPenjualan = DB::table('penjualan')
+                ->join('pelanggan', 'pelanggan.nama', '=', 'penjualan.pembeli')
+                ->where('penjualan.pembeli', $pelanggan->nama)
+                ->whereBetween('penjualan.created_at', [$dateStart, $dateEnd])
+                ->count();
+
+            // $pelanggan['jumlah'] = $dataPenjualan;
+            array_push($detailPelanggan, [
+                'id' => $pelanggan->id,
+                'nama' => $pelanggan->nama,
+                'alamat' => $pelanggan->alamat,
+                'status' => $pelanggan->status,
+                'tanda_tangan' => $pelanggan->tanda_tangan,
+                'jumlah_penjualan' => $jumlahPenjualan,
+                'bulan_tahun' => $params
+            ]);
+        }
+
         $data = [
-            'pelanggan' => Pelanggan::orderBy('id', 'DESC')->get(),
+            'pelanggan' => $detailPelanggan,
+            'selected_month' => $params
         ];
-        confirmDelete('Hapus Data!', 'Apakah kamu ingin menghapus data ini?');
+
+        return view('pages.pelanggan', $data);
+    }
+
+    public function getPelangganByMonth($params)
+    {
+        $dateStart = $params . "-01 00:00:00";
+        $dateEnd = $params . "-31 23:59:59";
+        $dataPelanggan = Pelanggan::all();
+        $detailPelanggan = [];
+        foreach ($dataPelanggan as $pelanggan) {
+            # code...
+            $jumlahPenjualan = DB::table('penjualan')
+                ->join('pelanggan', 'pelanggan.nama', '=', 'penjualan.pembeli')
+                ->where('penjualan.pembeli', $pelanggan->nama)
+                ->whereBetween('penjualan.created_at', [$dateStart, $dateEnd])
+                ->count();
+
+            // $pelanggan['jumlah'] = $dataPenjualan;
+            array_push($detailPelanggan, [
+                'id' => $pelanggan->id,
+                'nama' => $pelanggan->nama,
+                'alamat' => $pelanggan->alamat,
+                'status' => $pelanggan->status,
+                'tanda_tangan' => $pelanggan->tanda_tangan,
+                'jumlah_penjualan' => $jumlahPenjualan,
+                'bulan_tahun' => $params
+            ]);
+        }
+
+        $data = [
+            'pelanggan' => $detailPelanggan,
+            'selected_month' => $params
+        ];
+
         return view('pages.pelanggan', $data);
     }
 
@@ -109,9 +170,9 @@ class PelangganController extends Controller
                 }
             }
             $data = [
-                'nama' => $request->nama,
-                'alamat' => $request->alamat,
-                'status' => $request->status,
+                // 'nama' => $request->nama,
+                // 'alamat' => $request->alamat,
+                // 'status' => $request->status,
                 'tanda_tangan' => isset($file) ? $fileName : $currentPelangganTtd,
             ];
 

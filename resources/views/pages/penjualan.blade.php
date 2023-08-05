@@ -31,7 +31,7 @@
                     </ol>
                 </nav>
   
-                @if (Auth::user()->roles === 'admin') 
+                {{-- @if (Auth::user()->roles === 'admin') 
                     <div class="flex gap-4">
                         <a href="{{ route('penjualan_add') }}" class='h-9 rounded-md px-5 bg-indigo-500 text-white flex justif-center items-center active:bg-indigo-400 cursor-pointer'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -41,7 +41,7 @@
                             <span>Tambah</span>
                         </a>
                     </div>
-                @endif
+                @endif --}}
                 {{-- <x-primary-button>{{ __('Upload') }}</x-primary-button>
                 <x-primary-button>{{ __('Tambah') }}</x-primary-button>       --}}
             </div>
@@ -70,11 +70,11 @@
                             <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
-                            @if (Auth::user()->roles === 'admin') 
+                            {{-- @if (Auth::user()->roles === 'admin') 
                                 <th scope="col" class="px-6 py-3">
                                     Aksi
                                 </th>
-                            @endif
+                            @endif --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -105,6 +105,7 @@
                                                 @csrf
                                                 <input hidden value="{{$item->id}}" name="id">
                                                 <input hidden value="{{$item->status_pembelian}}" name="status_pembelian" >
+                                                @if (Auth::user()->roles === 'admin')
                                                 <button type="submit" class='h-8 rounded-md px-5 {{$item->status_pembelian === 'Sedang Diproses' ? 'hover:bg-indigo-400 bg-indigo-500' : 'hover:bg-amber-500 bg-amber-600'}} text-white flex justif-center items-center active:bg-indigo-400 cursor-pointer'>   
                                                     @if ($item->status_pembelian === 'Sedang Diproses')
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -117,6 +118,9 @@
                                                     @endif
                                                     <span>{{ $item->status_pembelian === 'Sedang Diproses' ? 'Sedang Diproses' : 'Dalam Perjalanan' }}</span>
                                                 </button>
+                                                @else
+                                                    <span>{{$item->status_pembelian}}</span>
+                                                @endif
                                             </form>
                                         @else
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-emerald-500">
@@ -125,12 +129,12 @@
                                         @endif
                                     </div>
                                 </td>
-                                @if (Auth::user()->roles === 'admin')    
+                                {{-- @if (Auth::user()->roles === 'admin')    
                                     <td class="px-6 py-4">
                                         <a href="/penjualan/edit/{{$item->id}}" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Edit</a href="#">
                                         <a href="/penjualan/destroy/{{$item->id}}" data-confirm-delete="true" class="bg-rose-200 text-rose-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-rose-200 dark:text-rose-800">Hapus</a href="#">
                                     </td>
-                                @endif
+                                @endif --}}
                             </tr>
                         @endforeach
                     </tbody>

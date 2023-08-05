@@ -32,13 +32,34 @@ class KeranjangController extends Controller
      */
     public function create(Request $request)
     {
-        //
+
         try {
             //code...
+            $totalHarga = 0;
+            $jumlahPembelian = [];
+            foreach ($request->jumlah_pembelian as $key) {
+                if ($key !== null) {
+                    array_push($jumlahPembelian, $key);
+                }
+            }
+
+            for ($i = 0; $i < count($request->jenis_gas); $i++) {
+                $gas = Gas::where('jenis_gas', $request->jenis_gas[$i])->first();
+                if ($gas->stok < 1) {
+                    Alert::error('Oops!', 'Maaf stok ' . $request->jenis_gas[$i] . ' kosong');
+                    return redirect()->route('keranjang_add');
+                }
+                if ($jumlahPembelian[$i] > $gas->stok) {
+                    Alert::error('Oops!', 'Maaf stok ' . $request->jenis_gas[$i] . ' kurang dari ' .  $jumlahPembelian[$i]);
+                    return redirect()->route('keranjang_add');
+                }
+                $totalHarga += $gas->harga * $jumlahPembelian[$i];
+            }
+
             $data = [
                 'user_id' => Auth::user()->id,
-                'jenis_gas' => $request->jenis_gas,
-                'jumlah' => $request->jumlah_pembelian,
+                'jenis_gas' => implode(", ", $request->jenis_gas),
+                'jumlah' => implode(", ", $request->jumlah_pembelian),
                 'tanggal' => $request->tanggal_pembelian,
                 'status_pembelian' => 'Sedang Diproses'
             ];
@@ -47,8 +68,8 @@ class KeranjangController extends Controller
                 'pembeli' => Auth::user()->name,
                 'status' => Auth::user()->status,
                 'alamat' => Auth::user()->address,
-                'jenis_gas' => $request->jenis_gas,
-                'jumlah_pembelian' => $request->jumlah_pembelian,
+                'jenis_gas' => implode(", ", $request->jenis_gas),
+                'jumlah_pembelian' => implode(", ", $request->jumlah_pembelian),
                 'tanggal_pembelian' => $request->tanggal_pembelian,
                 'status_pembelian' => 'Sedang Diproses'
             ];
@@ -70,13 +91,20 @@ class KeranjangController extends Controller
 
             Penjualan::create($dataPenjualan);
             Keranjang::create($data);
-            Alert::success('Berhasil!', 'Data telah ditambahkan ke keranjang.');
+
+            for ($i = 0; $i < count($request->jenis_gas); $i++) {
+                $gas = Gas::where('jenis_gas', $request->jenis_gas[$i])->first();
+                Gas::where('jenis_gas', $request->jenis_gas[$i])->update([
+                    'stok' => $gas->stok - $jumlahPembelian[$i]
+                ]);
+            }
+
+            Alert::success('Berhasil!', 'Total = Rp. ' . $totalHarga);
             return redirect()->route('keranjang');
         } catch (\Throwable $th) {
             //throw $th;
-            dd($th);
-            // Alert::error('Oops!', 'Data gagal ditambahkan ke keranjang.');
-            // return redirect()->route('keranjang');
+            Alert::error('Oops!', 'Data gagal ditambahkan ke keranjang.');
+            return redirect()->route('keranjang');
         }
     }
 

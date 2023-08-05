@@ -31,7 +31,7 @@
                     </ol>
                 </nav>
   
-                @if (Auth::user()->roles === 'admin') 
+                {{-- @if (Auth::user()->roles === 'admin') 
                     <div class="flex gap-4">
                         <a href="/pelanggan/import" class='h-9 rounded-md px-5 bg-emerald-500 text-white flex justif-center items-center active:bg-emerald-400'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -47,9 +47,13 @@
                             <span>Tambah</span>
                         </a>
                     </div>
-                @endif
+                @endif --}}
                 {{-- <x-primary-button>{{ __('Upload') }}</x-primary-button>
                 <x-primary-button>{{ __('Tambah') }}</x-primary-button>       --}}
+                
+            </div>
+            <div class="w-full flex flex-colum gap-2">
+                <input onchange="getMonth()" value="{{$selected_month}}" type="month" id="get-month" name="get_month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
             </div>
             <div class="w-full relative overflow-x-auto shadow-sm rounded-lg sm:rounded-lg bg-white p-8">
                 <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -71,11 +75,16 @@
                                 Tanda Tangan
                             </th>
                             @if (Auth::user()->roles === 'admin') 
-                                <th scope="col" class="px-6 py-3">
-                                    Aksi
-                                </th>
+                            <th scope="col" class="px-6 py-3">
+                                Aksi
+                            </th>
                             @endif
-                           
+                            <th scope="col" class="px-6 py-3">
+                                Tahun - Bulan
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Jumlah
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,27 +94,33 @@
                                     {{ $loop->iteration }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $item->nama }}
+                                    {{ $item['nama'] }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $item->alamat }}
+                                    {{ $item['alamat'] }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->status }}
+                                    {{ $item['status'] }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if($item->tanda_tangan)    
-                                        <img src="{{ asset('images/users/' . $item->tanda_tangan) }}" width="30" alt="Tanda Tangan"/>
+                                    @if($item['tanda_tangan'])    
+                                    <img src="{{ asset('images/users/' . $item['tanda_tangan']) }}" width="30" alt="Tanda Tangan"/>
                                     @else
-                                        -
+                                    -
                                     @endif
                                 </td>
                                 @if (Auth::user()->roles === 'admin')                
-                                    <td class="px-6 py-4">
-                                        <a href="/pelanggan/edit/{{$item->id}}" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Edit</a href="#">
-                                        <a href="/pelanggan/destroy/{{$item->id}}" data-confirm-delete="true" class="bg-rose-200 text-rose-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-rose-200 dark:text-rose-800">Hapus</a href="#">
-                                    </td>
+                                <td class="px-6 py-4">
+                                    <a href="/pelanggan/edit/{{$item['id']}}" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Tanda Tangan</a href="#">
+                                        {{-- <a href="/pelanggan/destroy/{{$item->id}}" data-confirm-delete="true" class="bg-rose-200 text-rose-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-rose-200 dark:text-rose-800">Hapus</a href="#"> --}}
+                                </td>
                                 @endif
+                                <td class="px-6 py-4">
+                                    {{ $item['bulan_tahun'] }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item['jumlah_penjualan'] }}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -113,4 +128,12 @@
             </div>
         </div>
     </div>
+    <script>
+        const getMonth = () => {
+            const getMonth = document.getElementById('get-month')
+            const selectedValue = document.getElementById('get-month').value;
+            window.location.href = '/pelanggan/' + selectedValue;
+        }
+    </script>
 </x-app-layout>
+

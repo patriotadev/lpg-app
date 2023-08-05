@@ -28,16 +28,19 @@
 
             .carousel-container {
                 display: flex;
+                justify-content: start;
+                margin-left: 40%;
                 transition: transform 0.5s ease-in-out;
             }
 
             .carousel-slide {
                 flex: 0 0 100%;
+                justify-content: center
             }
 
             .carousel-slide img {
-                width: 20%;
-                height: auto;
+                width: 300px;
+                height: 300px;
             }
 
         </style>

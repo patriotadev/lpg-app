@@ -6,10 +6,12 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
+use App\Mail\SendEmail;
 use App\Models\Gas;
 use App\Models\Keranjang;
 use App\Models\Pelanggan;
 use App\Models\Penjualan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +49,7 @@ Route::get('/jenis-gas', function () {
 })->middleware(['auth', 'verified'])->name('jenis_gas');
 
 Route::get('/pelanggan', [PelangganController::class, 'index'])->middleware(['auth', 'verified'])->name('pelanggan');
+Route::get('/pelanggan/{params}', [PelangganController::class, 'getPelangganByMonth'])->middleware(['auth', 'verified'])->name('pelanggan_month');
 
 Route::get('/jenis_gas', [GasController::class, 'index'])->middleware(['auth', 'verified'])->name('jenis_gas');
 

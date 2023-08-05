@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
             $table->string('pembeli');
-            $table->integer('jumlah_pembelian');
+            $table->string('jumlah_pembelian');
             $table->date('tanggal_pembelian');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

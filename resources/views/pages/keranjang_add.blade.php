@@ -59,7 +59,7 @@
                         <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
                         <input type="text" id="alamat" name="alamat" disabled value="{{$user->address}}" class="bg-gray-50 border opacity-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                     </div>
-                    <div class="mb-6">
+                    {{-- <div class="mb-6">
                         <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Gas</label>
                         <select onchange="selectGas()" id="select-gas" name="jenis_gas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                             <option selected>-- Pilih Jenis Gas --</option>
@@ -67,14 +67,24 @@
                             <option value="{{$item->jenis_gas}}">{{$item->jenis_gas}}</option>   
                             @endforeach
                         </select>
-                    </div>
-                    <div class="mb-6">
+                    </div> --}}
+                    {{-- <div class="mb-6">
                         <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
                         <input id="jumlah-gas" type="number" min="1" id="jumlah_pembelian" name="jumlah_pembelian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
-                    </div>
+                    </div> --}}
                     <div class="mb-6">
                         <label for="Tanggal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal</label>
                         <input type="date" id="Tanggal" name="tanggal_pembelian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="jenis_gas" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Jenis Gas</label>
+                        @foreach ($jenis_gas as $item)
+                        <div class="flex gap-2">
+                            <input type="checkbox" name="jenis_gas[]" onclick="handleJenisGasInput(this)" id="jenis-gas{{$loop->iteration}}" value="{{$item->jenis_gas}}" />
+                            <label for="jenis_gas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $item->jenis_gas }}</label>
+                        </div>
+                        <input type="hidden" id="jumlah-gas{{$loop->iteration}}" placeholder="{{$item->jenis_gas}}" type="number" min="1" id="jumlah_pembelian" name="jumlah_pembelian[]" class="bg-gray-50 mb-8  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-2/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
+                        @endforeach
                     </div>
                     <div class="flex justify-end">
                         <button href="{{ route('pelanggan') }}" class='h-9 rounded-md px-5 bg-slate-700 text-white flex justif-center items-center  active:bg-slate-600 cursor-pointer'>                              
@@ -87,20 +97,53 @@
     </div>
 
     <script>
-        const handleJumlahGasInput = () => {
+        //  const handleJumlahGasInput = () => {
+        //     const statusPembeli = document.getElementById('status-pembeli');
+        //     const jumlahGasInput = document.querySelector('#jumlah-gas');
+        //     jumlahGasInput.value = ''
+        //     if (statusPembeli.value === 'Rumah Tangga') {
+        //         jumlahGasInput.setAttribute('max', "1");
+        //     } else if (statusPembeli.value === 'Pedagang') {
+        //         jumlahGasInput.setAttribute('max', "2");
+        //     } else if (statusPembeli.value === 'Warung') {
+        //         jumlahGasInput.setAttribute('max', "10");
+        //     } else {
+        //         jumlahGasInput.removeAttribute('max');
+        //     }
+        // };
+
+        function handleJenisGasInput(id) {
             const statusPembeli = document.getElementById('status-pembeli');
-            const jumlahGasInput = document.querySelector('#jumlah-gas');
-            jumlahGasInput.value = ''
-            if (statusPembeli.value === 'Rumah Tangga') {
-                jumlahGasInput.setAttribute('max', "1");
-            } else if (statusPembeli.value === 'Pedagang') {
-                jumlahGasInput.setAttribute('max', "2");
-            } else if (statusPembeli.value === 'Warung') {
-                jumlahGasInput.setAttribute('max', "10");
+            const inputTotal = document.querySelector(`input[placeholder="${id.value}"]`);
+            console.log(statusPembeli.value);
+
+            if (inputTotal.placeholder.split('').find(gas => gas === '3') !== undefined) {
+                if (statusPembeli.value === 'Rumah Tangga') {
+                    inputTotal.setAttribute('max', "1");
+                } else if (statusPembeli.value === 'Pedagang') {
+                    inputTotal.setAttribute('max', "2");
+                } else if (statusPembeli.value === 'Warung') {
+                    inputTotal.setAttribute('max', "10");
+                } else {
+                    inputTotal.removeAttribute('max');
+                }
             } else {
-                jumlahGasInput.removeAttribute('max');
+                inputTotal.removeAttribute('max');
             }
-        };
+
+
+            if (inputTotal.type === "hidden" && id.checked) {
+                inputTotal.type = "number"
+            } else {
+                inputTotal.type = "hidden"
+            }
+
+            console.log(inputTotal)
+        }
+    </script>
+
+    {{-- <script>
+       
 
         const selectGas = () => {
             const statusPembeli = document.getElementById('status-pembeli');
@@ -113,5 +156,5 @@
                 jumlahGasInput.removeAttribute('max');
             }
         };
-    </script>
+    </script> --}}
 </x-app-layout>
