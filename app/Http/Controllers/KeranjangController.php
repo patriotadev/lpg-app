@@ -59,7 +59,7 @@ class KeranjangController extends Controller
             $data = [
                 'user_id' => Auth::user()->id,
                 'jenis_gas' => implode(", ", $request->jenis_gas),
-                'jumlah' => implode(", ", $request->jumlah_pembelian),
+                'jumlah' => implode(", ", $jumlahPembelian),
                 'tanggal' => $request->tanggal_pembelian,
                 'status_pembelian' => 'Sedang Diproses'
             ];
@@ -69,7 +69,7 @@ class KeranjangController extends Controller
                 'status' => Auth::user()->status,
                 'alamat' => Auth::user()->address,
                 'jenis_gas' => implode(", ", $request->jenis_gas),
-                'jumlah_pembelian' => implode(", ", $request->jumlah_pembelian),
+                'jumlah_pembelian' => implode(", ", $jumlahPembelian),
                 'tanggal_pembelian' => $request->tanggal_pembelian,
                 'status_pembelian' => 'Sedang Diproses'
             ];
