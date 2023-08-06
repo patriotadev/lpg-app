@@ -122,10 +122,10 @@
             <x-responsive-nav-link :href="route('lokasi')" :active="request()->routeIs('lokasi')">
                 {{ __('Lokasi') }}
             </x-responsive-nav-link>
-            @if (Auth::user()->roles === 'admin' || Auth::user()->roles === 'owner')
             <x-responsive-nav-link :href="route('jenis_gas')" :active="request()->routeIs('jenis_gas')">
                 {{ __('Jenis Gas') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->roles === 'admin' || Auth::user()->roles === 'owner')
             <x-responsive-nav-link :href="route('pelanggan')" :active="request()->routeIs('pelanggan')">
                 {{ __('Pelanggan') }}
             </x-responsive-nav-link>
