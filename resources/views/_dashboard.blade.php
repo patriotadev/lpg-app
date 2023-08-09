@@ -41,7 +41,8 @@
                 @endif
                
                 @if (Auth::user()->roles === 'public')
-                    <div class="p-6 text-gray-800 dark:text-gray-100 text-3xl text-center w-full">
+                    <div class="p-6 text-gray-800 dark:text-gray-100 text-3xl text-center w-full flex flex-wrap justify-center items-center gap-10">
+                        <img src="{{ asset('images/banner/vector3.png') }}" width="400" alt="Image 3">
                         {{ __("Selamat datang " . Auth::user()->name) . "! 👋" }}
                     </div>   
                 @endif
