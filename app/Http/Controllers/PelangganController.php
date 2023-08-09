@@ -24,12 +24,19 @@ class PelangganController extends Controller
         $dataPelanggan = Pelanggan::all();
         $detailPelanggan = [];
         foreach ($dataPelanggan as $pelanggan) {
-            # code...
+            $totalJumlahGas = 0;
             $jumlahPenjualan = DB::table('penjualan')
                 ->join('pelanggan', 'pelanggan.nama', '=', 'penjualan.pembeli')
                 ->where('penjualan.pembeli', $pelanggan->nama)
                 ->whereBetween('penjualan.created_at', [$dateStart, $dateEnd])
-                ->count();
+                ->get();
+
+            foreach ($jumlahPenjualan as $key) {
+                $jumlahList = explode(", ", $key->jumlah_pembelian);
+                for ($i = 0; $i < count($jumlahList); $i++) {
+                    $totalJumlahGas += (int)$jumlahList[$i];
+                }
+            }
 
             // $pelanggan['jumlah'] = $dataPenjualan;
             array_push($detailPelanggan, [
@@ -38,7 +45,7 @@ class PelangganController extends Controller
                 'alamat' => $pelanggan->alamat,
                 'status' => $pelanggan->status,
                 'tanda_tangan' => $pelanggan->tanda_tangan,
-                'jumlah_penjualan' => $jumlahPenjualan,
+                'jumlah_penjualan' => $totalJumlahGas,
                 'bulan_tahun' => $params
             ]);
         }
@@ -58,12 +65,19 @@ class PelangganController extends Controller
         $dataPelanggan = Pelanggan::all();
         $detailPelanggan = [];
         foreach ($dataPelanggan as $pelanggan) {
-            # code...
+            $totalJumlahGas = 0;
             $jumlahPenjualan = DB::table('penjualan')
                 ->join('pelanggan', 'pelanggan.nama', '=', 'penjualan.pembeli')
                 ->where('penjualan.pembeli', $pelanggan->nama)
                 ->whereBetween('penjualan.created_at', [$dateStart, $dateEnd])
-                ->count();
+                ->get();
+
+            foreach ($jumlahPenjualan as $key) {
+                $jumlahList = explode(", ", $key->jumlah_pembelian);
+                for ($i = 0; $i < count($jumlahList); $i++) {
+                    $totalJumlahGas += (int)$jumlahList[$i];
+                }
+            }
 
             // $pelanggan['jumlah'] = $dataPenjualan;
             array_push($detailPelanggan, [
@@ -72,7 +86,7 @@ class PelangganController extends Controller
                 'alamat' => $pelanggan->alamat,
                 'status' => $pelanggan->status,
                 'tanda_tangan' => $pelanggan->tanda_tangan,
-                'jumlah_penjualan' => $jumlahPenjualan,
+                'jumlah_penjualan' => $totalJumlahGas,
                 'bulan_tahun' => $params
             ]);
         }

@@ -18,7 +18,15 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-between mt-4">
+            <div class="flex gap-2 items-center">
+                <a href="{{ route('login') }}" class='h-8 w-8 rounded-full p-2 bg-slate-500 text-white flex justif-center items-center  active:bg-slate-400 cursor-pointer'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                      </svg>
+                </a>
+                <span class="text-sm">Login</span>
+            </div>
             <x-primary-button>
                 {{ __('Confirm') }}
             </x-primary-button>

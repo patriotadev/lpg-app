@@ -29,13 +29,12 @@
             .carousel-container {
                 display: flex;
                 justify-content: start;
-                margin-left: 40%;
                 transition: transform 0.5s ease-in-out;
             }
 
             .carousel-slide {
                 flex: 0 0 100%;
-                justify-content: center
+                justify-content: start
             }
 
             .carousel-slide img {
@@ -68,7 +67,9 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            let table = new DataTable('.table');
+            let table = new DataTable('.table', {
+                "ordering": false
+            });
         });
     </script>
     </body>

@@ -7,9 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center gap-10 p-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center flex-wrap gap-10 p-8">
                 @if (Auth::user()->roles !== 'public')
-                    <div class="bg-white border-2 hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer border-amber-600 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                    <img src="{{ asset('images/banner/vector1.png') }}" width="400" alt="Image 3">
+                    <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                         <h1 class="text-6xl">{{ $totalGas }}</h1>
                         <div class="flex justify-center items-end gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -18,7 +19,7 @@
                             <div class="">Total Jenis Gas</div>
                         </div>
                     </div>
-                    <div class="bg-white border-2 hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer border-amber-600 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                    <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                         <h1 class="text-6xl">{{$totalPelanggan}}</h1>
                         <div class="flex justify-center items-end gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -27,7 +28,7 @@
                             <div class="">Total Pelanggan</div>
                         </div>
                     </div>
-                    <div class="bg-white border-2 hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer border-amber-600 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                    <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                         <h1 class="text-6xl">{{$totalPenjualan}}</h1>
                         <div class="flex justify-center items-end gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -45,19 +46,26 @@
                     </div>   
                 @endif
             </div>
-            <div id="carousel" class="bg-white rounded-lg mt-10 ">
+            <div id="carousel" class="bg-gradient-to-r from-amber-500 to-amber-800 rounded-lg mt-10 ">
                 <div class="carousel-container mt-10">
-                    <div class="carousel-slide">
-                        <img src="{{ asset('images/slider/slider-3.png') }}" alt="Image 3">
+                    <div class="carousel-slide flex items-center flex-wrap lg:flex-nowrap">
+                        <img src="{{ asset('images/slider/slider-1.png') }}" alt="Image 3">
+                        <span class="text-white m-5">Elpiji 3 kg adalah elpiji bersubsidi yang dikemas dalam tabung 3 kg. 
+                            tabung gas ini mendapatkan subsidi dari pemerintah sehingga  harganya pun mudah dijangkau oleh berbagai lapisan masyarakat kurang mampu.
+                            Maka dari itu, pada tabung LPG subsidi terdapat tulisan “Hanya untuk Masyarakat Miskin”. kekurangan dari LPG subsidi adalah mudah bocor.</span>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide flex items-center flex-wrap lg:flex-nowrap">
                         <img src="{{ asset('images/slider/slider-2.png') }}" alt="Image 2">
+                        <span class="text-white m-5">Elpiji 12 kg adalah elpiji non-subsidi yang dikemas dalam tabung 12 kg.
+                            gas Elpiji 12 kg ini sudah memenuhi SNI 19-1452-2001, sedangkan katup/valve juga sudah memenuhi standar SNI 1591-2008</span>
                     </div>
-                    <div class="carousel-slide">
-                        <img src="{{ asset('images/slider/slider-1.png') }}" alt="Image 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="{{ asset('images/slider/slider-4.png') }}" alt="Image 4">
+                    <div class="carousel-slide flex items-center flex-wrap lg:flex-nowrap">
+                        <img src="{{ asset('images/slider/slider-3.png') }}" alt="Image 1">
+                        <span class="text-white m-5">
+                            Bright Gas tidak mendapat subsidi dari pemerintah sama sekali. Sehingga berdampak pada harga Bright Gas lebih mahal dari LPG subsidi.
+                            Bright Gas dilengkapi teknologi valve ganda yang berfungsi mengurangi tekanan gas berlebih. Hal tersebut membuat Bright Gas dua kali lebih aman dari pada tabung LPG subsidi. Sehingga Bright Gas tak mudah bocor dan bisa lebih hemat.
+                            Bright Gas dilengkapi dengan security seal cap atau penutup tabung yang lebih aman, sebab menggunakan teknologi teknologi double spindle dan karet pelindung. Tabung Bright Gas ini disebut lebih aman dan tahan benturan. 
+                        </span>
                     </div>
                 </div>
             </div>
