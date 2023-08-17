@@ -62,6 +62,7 @@
             <main>
                 {{ $slot }}
             </main>
+            @include('layouts.footer')
         </div>
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>

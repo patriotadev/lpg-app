@@ -51,7 +51,7 @@
                         <select disabled id="status-pembeli" name="status" class="bg-gray-50 border opacity-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                             <option selected>-- Pilih Status -- </option>
                             <option {{$user->status === 'Rumah Tangga' ? 'selected' : ''}} value="Rumah Tangga">Rumah Tangga</option>
-                            <option {{$user->status === 'Warung' ? 'selected' : ''}} value="Warung">Warung</option>
+                            <option {{$user->status === 'Sub Agen' ? 'selected' : ''}} value="Sub Agen">Sub Agen</option>
                             <option {{$user->status === 'Pedagang' ? 'selected' : ''}} value="Pedagang">Pedagang</option>
                         </select>
                     </div>
@@ -59,12 +59,20 @@
                         <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
                         <input type="text" id="alamat" name="alamat" disabled value="{{$user->address}}" class="bg-gray-50 border opacity-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                     </div>
+                    <div class="mb-6">
+                        <label for="kelurahan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelurahan</label>
+                        <select disabled id="kelurahan" name="kelurahan" class="bg-gray-50 border opacity-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
+                            <option selected>-- Pilih Kelurahan -- </option>
+                            <option {{$user->kelurahan === 'Muktijaya' ? 'selected' : ''}} value="Muktijaya">Muktijaya</option>
+                            <option {{$user->kelurahan === 'Lubang Buaya' ? 'selected' : ''}} value="Lubang Buaya">Lubang Buaya</option>
+                        </select>
+                    </div>
                     {{-- <div class="mb-6">
                         <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Gas</label>
                         <select onchange="selectGas()" id="select-gas" name="jenis_gas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                             <option selected>-- Pilih Jenis Gas --</option>
                             @foreach ($jenis_gas as $item)
-                            <option value="{{$item->jenis_gas}}">{{$item->jenis_gas}}</option>   
+                            <option value="{{$item->jenis_gas}}">{{$item->jenis_gas}}</option>
                             @endforeach
                         </select>
                     </div> --}}
@@ -87,7 +95,7 @@
                         @endforeach
                     </div>
                     <div class="flex justify-end">
-                        <button href="{{ route('pelanggan') }}" class='h-9 rounded-md px-5 bg-slate-700 text-white flex justif-center items-center  active:bg-slate-600 cursor-pointer'>                              
+                        <button href="{{ route('pelanggan') }}" class='h-9 rounded-md px-5 bg-slate-700 text-white flex justif-center items-center  active:bg-slate-600 cursor-pointer'>
                             <span>Order</span>
                         </button>
                     </div>
@@ -105,7 +113,7 @@
         //         jumlahGasInput.setAttribute('max', "1");
         //     } else if (statusPembeli.value === 'Pedagang') {
         //         jumlahGasInput.setAttribute('max', "2");
-        //     } else if (statusPembeli.value === 'Warung') {
+        //     } else if (statusPembeli.value === 'Sub Agen') {
         //         jumlahGasInput.setAttribute('max', "10");
         //     } else {
         //         jumlahGasInput.removeAttribute('max');
@@ -122,7 +130,7 @@
                     inputTotal.setAttribute('max', "1");
                 } else if (statusPembeli.value === 'Pedagang') {
                     inputTotal.setAttribute('max', "2");
-                } else if (statusPembeli.value === 'Warung') {
+                } else if (statusPembeli.value === 'Sub Agen') {
                     inputTotal.setAttribute('max', "10");
                 } else {
                     inputTotal.removeAttribute('max');
@@ -143,7 +151,7 @@
     </script>
 
     {{-- <script>
-       
+
 
         const selectGas = () => {
             const statusPembeli = document.getElementById('status-pembeli');

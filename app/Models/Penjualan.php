@@ -16,6 +16,7 @@ class Penjualan extends Model
         'pembeli',
         'status',
         'alamat',
+        'kelurahan',
         'jenis_gas',
         'jumlah_pembelian',
         'tanggal_pembelian',

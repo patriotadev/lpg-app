@@ -43,12 +43,15 @@ class PelangganController extends Controller
                 'id' => $pelanggan->id,
                 'nama' => $pelanggan->nama,
                 'alamat' => $pelanggan->alamat,
+                'kelurahan' => $pelanggan->kelurahan,
                 'status' => $pelanggan->status,
                 'tanda_tangan' => $pelanggan->tanda_tangan,
                 'jumlah_penjualan' => $totalJumlahGas,
                 'bulan_tahun' => $params
             ]);
         }
+
+        // dd($detailPelanggan);
 
         $data = [
             'pelanggan' => $detailPelanggan,
@@ -85,6 +88,7 @@ class PelangganController extends Controller
                 'nama' => $pelanggan->nama,
                 'alamat' => $pelanggan->alamat,
                 'status' => $pelanggan->status,
+                'kelurahan' => $pelanggan->kelurahan,
                 'tanda_tangan' => $pelanggan->tanda_tangan,
                 'jumlah_penjualan' => $totalJumlahGas,
                 'bulan_tahun' => $params

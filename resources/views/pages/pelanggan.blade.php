@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-8 flex-wrap sm:rounded-lg">
-            <div class="flex justify-between items-center flex-wrap w-full gap-4">    
+            <div class="flex justify-between items-center flex-wrap w-full gap-4">
                 <nav class="flex" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
@@ -19,19 +19,19 @@
                     <li>
                         <div class="flex items-center">
                         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Pelanggan</a>
+                        <a href="{{route('laporan')}}" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Laporan</a>
                         </div>
                     </li>
                     <li aria-current="page">
                         <div class="flex items-center">
                         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Tabel</span>
+                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Logbook</span>
                         </div>
                     </li>
                     </ol>
                 </nav>
-  
-                {{-- @if (Auth::user()->roles === 'admin') 
+
+                {{-- @if (Auth::user()->roles === 'admin')
                     <div class="flex gap-4">
                         <a href="/pelanggan/import" class='h-9 rounded-md px-5 bg-emerald-500 text-white flex justif-center items-center active:bg-emerald-400'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
@@ -43,14 +43,14 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
-                            
+
                             <span>Tambah</span>
                         </a>
                     </div>
                 @endif --}}
                 {{-- <x-primary-button>{{ __('Upload') }}</x-primary-button>
                 <x-primary-button>{{ __('Tambah') }}</x-primary-button>       --}}
-                
+
             </div>
             <div class="w-full flex flex-colum gap-2">
                 <input onchange="getMonth()" value="{{$selected_month}}" type="month" id="get-month" name="get_month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
@@ -69,12 +69,15 @@
                                 Alamat
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Kelurahan
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Tanda Tangan
                             </th>
-                            @if (Auth::user()->roles === 'admin') 
+                            @if (Auth::user()->roles === 'admin')
                             <th scope="col" class="px-6 py-3">
                                 Aksi
                             </th>
@@ -100,16 +103,19 @@
                                     {{ $item['alamat'] }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    {{ $item['kelurahan'] }}
+                                </td>
+                                <td class="px-6 py-4">
                                     {{ $item['status'] }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if($item['tanda_tangan'])    
+                                    @if($item['tanda_tangan'])
                                     <img src="{{ asset('images/users/' . $item['tanda_tangan']) }}" width="30" alt="Tanda Tangan"/>
                                     @else
                                     -
                                     @endif
                                 </td>
-                                @if (Auth::user()->roles === 'admin')                
+                                @if (Auth::user()->roles === 'admin')
                                 <td class="px-6 py-4">
                                     <a href="/pelanggan/edit/{{$item['id']}}" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Tanda Tangan</a href="#">
                                         {{-- <a href="/pelanggan/destroy/{{$item->id}}" data-confirm-delete="true" class="bg-rose-200 text-rose-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-rose-200 dark:text-rose-800">Hapus</a href="#"> --}}

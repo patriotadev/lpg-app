@@ -35,6 +35,20 @@ class KeranjangController extends Controller
 
         try {
             //code...
+
+            $checkHasOrder = Penjualan::where([
+                'pembeli' => Auth::user()->name,
+                'status' => Auth::user()->status,
+                'alamat' => Auth::user()->address,
+                'tanggal_pembelian' => $request->tanggal_pembelian,
+            ])->first();
+
+            if ($checkHasOrder) {
+                Alert::error('Oops!', 'Pembelian gagal, anda sudah melakukan order di hari ini');
+                return redirect()->route('keranjang');
+            }
+
+
             $totalHarga = 0;
             $jumlahPembelian = [];
             foreach ($request->jumlah_pembelian as $key) {
@@ -50,7 +64,7 @@ class KeranjangController extends Controller
                     return redirect()->route('keranjang_add');
                 }
                 if ($jumlahPembelian[$i] > $gas->stok) {
-                    Alert::error('Oops!', 'Maaf stok ' . $request->jenis_gas[$i] . ' kurang dari ' .  $jumlahPembelian[$i]);
+                    Alert::error('Oops!', 'Maaf stok ' . $request->jenis_gas[$i] . ' kurang dari ' .  $jumlahPembelian[$i] . ' yaitu sisa ' . $gas->stok);
                     return redirect()->route('keranjang_add');
                 }
                 $totalHarga += $gas->harga * $jumlahPembelian[$i];
@@ -68,6 +82,7 @@ class KeranjangController extends Controller
                 'pembeli' => Auth::user()->name,
                 'status' => Auth::user()->status,
                 'alamat' => Auth::user()->address,
+                'kelurahan' => Auth::user()->kelurahan,
                 'jenis_gas' => implode(", ", $request->jenis_gas),
                 'jumlah_pembelian' => implode(", ", $jumlahPembelian),
                 'tanggal_pembelian' => $request->tanggal_pembelian,
@@ -78,6 +93,7 @@ class KeranjangController extends Controller
                 'nama' => Auth::user()->name,
                 'status' => Auth::user()->status,
                 'alamat' => Auth::user()->address,
+                'kelurahan' => Auth::user()->kelurahan,
             ])->first();
 
             if (!$pelanggan) {
@@ -85,6 +101,7 @@ class KeranjangController extends Controller
                     'nama' => Auth::user()->name,
                     'status' => Auth::user()->status,
                     'alamat' => Auth::user()->address,
+                    'kelurahan' => Auth::user()->kelurahan,
                 ];
                 Pelanggan::create($dataPelanggan);
             }
@@ -103,8 +120,10 @@ class KeranjangController extends Controller
             return redirect()->route('keranjang');
         } catch (\Throwable $th) {
             //throw $th;
-            Alert::error('Oops!', 'Data gagal ditambahkan ke keranjang.');
-            return redirect()->route('keranjang');
+
+            dd($th);
+            // Alert::error('Oops!', 'Data gagal ditambahkan ke keranjang.');
+            // return redirect()->route('keranjang');
         }
     }
 
