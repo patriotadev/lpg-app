@@ -45,7 +45,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-amber-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-[#f2ecb3] dark:bg-gray-900">
             @include('layouts.navigation')
             @include('sweetalert::alert')
 

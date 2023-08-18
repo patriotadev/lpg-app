@@ -7,15 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center flex-wrap gap-10 p-8">
+            <div class=" dark:bg-gray-800 overflow-hidden sm:rounded-lg flex justify-start items-start flex-wrap gap-10 p-8">
                 @if (Auth::user()->roles !== 'public')
                     <img class="rounded-lg" src="{{ asset('images/banner/pangkalan.jpeg') }}" width="400" alt="Image 3">
-                    <div class="flex flex-col gap-8">
+                    <div class="flex flex-col gap-8 w-[700px]">
                         <div>
                             <span class="text-xl font-semibold">"Website Pangkalan LPG khusus untuk pelanggan Kecamatan Setu"</span>
                         </div>
                         <div class="flex gap-6 flex-wrap">
-                            <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                            <div class="bg-[#997f7d] text-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                                 <h1 class="text-6xl">{{ $totalGas }}</h1>
                                 <div class="flex justify-center items-end gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -24,7 +24,7 @@
                                     <div class="">Total Jenis Gas</div>
                                 </div>
                             </div>
-                            <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                            <div class="bg-[#997f7d] text-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                                 <h1 class="text-6xl">{{$totalPelanggan}}</h1>
                                 <div class="flex justify-center items-end gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -33,7 +33,7 @@
                                     <div class="">Total Pelanggan</div>
                                 </div>
                             </div>
-                            <div class="bg-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
+                            <div class="bg-[#997f7d] text-white hover:shadow-xl hover:-translate-y-2 duration-150 cursor-pointer shadow-xl dark:bg-gray-800 overflow-hidden sm:rounded-lg w-48 h-48 p-4 flex flex-col items-center justify-around">
                                 <h1 class="text-6xl">{{$totalPenjualan}}</h1>
                                 <div class="flex justify-center items-end gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -62,7 +62,7 @@
                     </div>
                 @endif
             </div>
-            <div id="carousel" class="bg-gradient-to-r from-amber-500 to-amber-800 rounded-lg mt-10 ">
+            <div id="carousel" class="bg-[#997f7d] rounded-lg mt-10 ">
                 <div class="carousel-container mt-10">
                     <div class="carousel-slide flex items-center flex-wrap lg:flex-nowrap">
                         <img src="{{ asset('images/slider/slider-1.png') }}" alt="Image 3">
