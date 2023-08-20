@@ -178,7 +178,7 @@ class LaporanController extends Controller
             }
 
             $data = [
-                'selected_month' => '',
+                'selected_month' => $params,
                 'jenis_gas' => Gas::all(),
                 'penerimaan' => Penjualan::all(),
                 'store' => $store

@@ -1,4 +1,4 @@
-<div class="w-full bottom-0 p-16 border-t-2 border-white">
+<div class="w-full bottom-0 p-16 border-t-2 border-white bg-[#f2ecb3]">
     <div class="flex flex-wrap gap-32 justify-center pt-8">
         <div class="pt-8 w-[300px]">
             TENTANG KAMI
