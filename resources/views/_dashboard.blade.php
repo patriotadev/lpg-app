@@ -58,9 +58,9 @@
                         {{ __("Selamat datang " . Auth::user()->name) . "! 👋" }}
                     @endif
                     </div>
-                    <div class="p-6 text-gray-800 dark:text-gray-100 text-center w-full flex flex-wrap bg-gray-200 shadow-lg rounded-lg justify-start items-center">
-                        <img class="rounded-lg shadow-lg" src="{{ asset('images/banner/pangkalan.jpeg') }}" width="400" alt="Image 3">
-                        <div class="flex items-end flex-col gap-8 w-[700px]">
+                    <div class="p-6 text-gray-800 dark:text-gray-100 text-center w-full flex flex-wrap gap-10 bg-gray-200 shadow-lg rounded-lg justify-start items-center">
+                        <img class="rounded-lg shadow-lg" src="{{ asset('images/banner/pangkalan.jpeg') }}" width="350" alt="Image 3">
+                        <div class="flex items-start flex-col gap-8 w-[650px]">
                             {{-- <div>
                                 <span class="text-xl font-semibold">"Website Pangkalan LPG khusus untuk pelanggan Kecamatan Setu"</span>
                             </div> --}}
