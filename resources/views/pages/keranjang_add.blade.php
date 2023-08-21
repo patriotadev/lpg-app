@@ -91,7 +91,7 @@
                             <input type="checkbox" name="jenis_gas[]" onclick="handleJenisGasInput(this)" id="jenis-gas{{$loop->iteration}}" value="{{$item->jenis_gas}}" />
                             <label for="jenis_gas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $item->jenis_gas }}</label>
                         </div>
-                        <input type="hidden" id="jumlah-gas{{$loop->iteration}}" placeholder="{{$item->jenis_gas}}" type="number" min="1" id="jumlah_pembelian" name="jumlah_pembelian[]" class="bg-gray-50 mb-8  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-2/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
+                        <input type="hidden" id="jumlah-gas{{$loop->iteration}}" dataid="{{$item->jenis_gas}}" placeholder="Jumlah" type="number" min="1" id="jumlah_pembelian" name="jumlah_pembelian[]" class="bg-gray-50 mb-8  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-2/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-600 dark:focus:border-amber-600" required>
                         @endforeach
                     </div>
                     <div class="flex justify-end">
@@ -122,10 +122,9 @@
 
         function handleJenisGasInput(id) {
             const statusPembeli = document.getElementById('status-pembeli');
-            const inputTotal = document.querySelector(`input[placeholder="${id.value}"]`);
-            console.log(statusPembeli.value);
+            const inputTotal = document.querySelector(`input[dataid="${id.value}"]`);
 
-            if (inputTotal.placeholder.split('').find(gas => gas === '3') !== undefined) {
+            if (id.value.split('').find(gas => gas === '3') !== undefined) {
                 if (statusPembeli.value === 'Rumah Tangga') {
                     inputTotal.setAttribute('max', "1");
                 } else if (statusPembeli.value === 'Pedagang') {
@@ -146,7 +145,6 @@
                 inputTotal.type = "hidden"
             }
 
-            console.log(inputTotal)
         }
     </script>
 
