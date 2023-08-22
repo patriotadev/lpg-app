@@ -32,9 +32,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
 
     $data = [
-        'totalGas' => Gas::all()->count(),
-        'totalPelanggan' => Pelanggan::all()->count(),
-        'totalPenjualan' => Penjualan::all()->count(),
+        'totalRT' => Penjualan::where('status', 'Rumah Tangga')->count(),
+        'totalPedagang' => Penjualan::where('status', 'Pedagang')->count(),
+        'totalSubAgen' => Penjualan::where('status', 'Sub Agen')->count(),
     ];
 
     return view('_dashboard', $data);
